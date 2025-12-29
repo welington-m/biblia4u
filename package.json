@@ -1,0 +1,44 @@
+{
+  "name": "biblia-multi-idiomas",
+  "version": "1.0.0",
+  "description": "Bíblia multi-idiomas (PT/JA) - Desktop",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "electron .",
+    "dist": "electron-builder",
+    "pack": "electron-builder --dir"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.welington.biblia",
+    "productName": "Biblia Multi-Idiomas",
+    "files": [
+      "electron/**/*",
+      "public/**/*"
+    ],
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "build/icon.png"
+    },
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "build/icon.ico"
+    }
+  }
+}

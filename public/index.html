@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bíblia Multi-Idiomas (PT/JA)</title>
+
+  <!-- Materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="theme-dark">
+  <!-- Topbar -->
+  <nav class="app-nav z-depth-0">
+    <div class="nav-wrapper app-navwrap">
+      <div class="brand-logo app-title">
+        Bíblia Multi-Idiomas <span class="app-subtitle hide-on-small-only">Desenvolvido por: <b>Welington Jose Miyazato</b></span>
+      </div>
+
+      <ul class="right">
+        <li class="hide-on-small-only">
+          <span class="chip app-chip">
+            Origem: <b id="origin">—</b>
+          </span>
+        </li>
+        <li class="hide-on-small-only">
+          <span class="chip app-chip">
+            API: <b>/pp</b>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="app-main">
+    <div class="app-container">
+      <div class="row app-row">
+
+        <!-- Left column -->
+        <div class="col s12 m5 l4">
+          <div class="card app-card">
+            <div class="card-content">
+              <div class="app-pills">
+                <span id="langStatus" class="chip app-chip"><i class="material-icons tiny">translate</i> PT/JA</span>
+                <span id="status" class="chip app-chip"><i class="material-icons tiny">info</i> Iniciando…</span>
+              </div>
+
+              <div class="divider app-divider"></div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select id="book"></select>
+                  <label>Livro</label>
+                </div>
+
+                <div class="input-field col s12">
+                  <input id="chapter" type="number" min="1" value="1" />
+                  <label for="chapter" class="active">Capítulo</label>
+                </div>
+
+                <div class="input-field col s6">
+                  <input id="vStart" type="number" min="1" placeholder="ex: 1" />
+                  <label for="vStart">Verso início</label>
+                </div>
+
+                <div class="input-field col s6">
+                  <input id="vEnd" type="number" min="1" placeholder="ex: 10" />
+                  <label for="vEnd">Verso fim</label>
+                </div>
+              </div>
+
+              <div class="app-actions">
+                <button id="loadBtn" class="btn waves-effect waves-light">
+                  Carregar
+                  <i class="material-icons right">open_in_new</i>
+                </button>
+                <button id="clearSelBtn" class="btn-flat waves-effect app-btn-flat-danger">
+                  Limpar seleção
+                </button>
+              </div>
+
+              <p class="app-hint">
+                Dica: use intervalo (início/fim) ou marque versículos manualmente na lista ao lado.
+                A tabela abre em <b>nova janela</b>.
+              </p>
+
+              <div class="divider app-divider"></div>
+
+              <h6 class="app-section-title">Traduções</h6>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <select id="ptSelect"></select>
+                  <label>Português</label>
+                </div>
+                <div class="col s12 app-mini">
+                  Selecionado: <span class="app-accent" id="ptCode">—</span>
+                </div>
+
+                <div class="input-field col s12" style="margin-top: 12px;">
+                  <select id="jaSelect"></select>
+                  <label>Japonês</label>
+                </div>
+                <div class="col s12 app-mini">
+                  Selecionado: <span class="app-accent" id="jaCode">—</span>
+                </div>
+              </div>
+
+              <div class="divider app-divider"></div>
+
+              <h6 class="app-section-title">Configurações</h6>
+
+              <div class="row" style="margin-bottom: 0;">
+                <!-- Theme toggle -->
+                <div class="col s12">
+                  <div class="switch app-switch">
+                    <label>
+                      Light
+                      <input id="themeToggle" type="checkbox">
+                      <span class="lever"></span>
+                      Dark
+                    </label>
+                  </div>
+                  <div class="app-mini">
+                    Alterna tema do dashboard e da janela "Tabela comparativa".
+                  </div>
+                </div>
+
+                <!-- Font size control (Comparative table) -->
+                <div class="col s12" style="margin-top: 14px;">
+                  <label class="app-range-label">
+                    Fonte da Tabela comparativa: <b id="fontSizeValue">16</b>px
+                  </label>
+                  <p class="range-field">
+                    <input id="fontSize" type="range" min="12" max="76" step="1" />
+                  </p>
+                  <div class="app-mini">
+                    Ajusta a fonte na janela de comparação (e salva).
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-panel app-panel">
+                Se o navegador bloquear a janela, permita popups para <code>http://localhost:8080</code>.
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="col s12 m7 l8">
+          <div class="card app-card">
+            <div class="card-content">
+              <div class="app-right-header">
+                <div>
+                  <h6 class="app-section-title" style="margin:0;">Seleção manual (texto base = Português)</h6>
+                  <div class="app-mini">
+                    Marque versículos para comparar. A janela da tabela atualiza automaticamente.
+                  </div>
+                </div>
+
+                <div class="hide-on-small-only app-mini">
+                  <i class="material-icons tiny">open_in_new</i> Resultado abre em nova janela
+                </div>
+              </div>
+
+              <div id="verses" class="app-verses collection"></div>
+            </div>
+          </div>
+
+          <div class="card app-card">
+            <div class="card-content">
+              <h6 class="app-section-title" style="margin:0;">Tabela comparativa</h6>
+              <div class="app-mini" style="margin-top:6px;">
+                A tabela é exibida <b>sempre</b> em uma nova janela ao clicar em <b>Carregar</b>.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Materialize JS -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- App JS -->
+  <script defer src="js/app.js"></script>
+</body>
+</html>

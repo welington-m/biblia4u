@@ -1,0 +1,296 @@
+:root {
+  --bg: #0b1220;
+  --bg2: #070b14;
+  --card: rgba(17, 26, 46, .86);
+  --border: rgba(255,255,255,.10);
+  --text: #eaf0ff;
+  --muted: rgba(234,240,255,.68);
+  --accent: #5eead4;
+  --danger: #fb7185;
+
+  /* comparative table */
+  --cmp-font-size: 16px;
+}
+
+/* Layout max width (quase full) */
+.app-container{
+  width: min(1600px, 98vw);
+  margin: 0 auto;
+  padding: 14px 10px;
+}
+
+.app-main{
+  min-height: calc(100vh - 64px);
+}
+
+.app-row{ margin-bottom: 0; }
+
+.app-nav{
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.app-navwrap{ padding: 0 12px; }
+
+.app-title{
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: .3px;
+}
+
+.app-subtitle{
+  opacity: .75;
+  font-weight: 500;
+  margin-left: 10px;
+  font-size: 13px;
+}
+
+.app-card{
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.app-divider{ margin: 16px 0; opacity: .7; }
+
+.app-pills{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  align-items:center;
+  justify-content: space-between;
+}
+
+.app-chip{
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+}
+
+.app-chip b{ color: var(--text); }
+
+.app-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap: wrap;
+  align-items:center;
+  margin-top: 6px;
+}
+
+.app-btn-flat-danger{
+  color: var(--danger) !important;
+}
+
+.app-hint{
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.app-section-title{
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+
+.app-mini{
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.app-accent{ color: var(--accent); font-weight: 800; }
+
+.app-panel{
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(0,0,0,.12);
+  color: var(--muted);
+}
+
+.app-panel code{ color: var(--accent); }
+
+.app-right-header{
+  display:flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  gap: 10px;
+}
+
+/* Verses list */
+.app-verses{
+  margin-top: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: auto;
+  max-height: min(65vh, 640px);
+  background: rgba(0,0,0,.10);
+}
+
+.app-verses .collection-item{
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+  color: var(--text);
+}
+
+.app-verses .collection-item:last-child{
+  border-bottom: 0 !important;
+}
+
+.app-verse-row{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.app-verse-num{
+  min-width: 44px;
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+/* Texto do verso: usa as variáveis do tema (dark/light) */
+.app-verse-text{
+  color: var(--text);
+  opacity: .92;
+  line-height: 1.55;
+  flex: 1;              /* evita “quebra feia” e melhora responsivo */
+  word-break: break-word;
+}
+
+
+/* Materialize dark overrides */
+.theme-dark{
+  background: linear-gradient(180deg, var(--bg2), var(--bg));
+  color: var(--text);
+}
+
+.theme-dark .card{
+  background: var(--card) !important;
+}
+
+.theme-dark .divider{
+  background-color: rgba(255,255,255,.12) !important;
+}
+
+.theme-dark .input-field input,
+.theme-dark .input-field input[type=number]{
+  color: var(--text) !important;
+  border-bottom: 1px solid rgba(255,255,255,.18) !important;
+}
+
+.theme-dark .input-field input:focus{
+  border-bottom: 1px solid var(--accent) !important;
+  box-shadow: 0 1px 0 0 var(--accent) !important;
+}
+
+.theme-dark .input-field label{
+  color: rgba(234,240,255,.6) !important;
+}
+
+.theme-dark .input-field .prefix.active,
+.theme-dark .input-field label.active{
+  color: var(--accent) !important;
+}
+
+.theme-dark .select-wrapper input.select-dropdown{
+  color: var(--text) !important;
+  border-bottom: 1px solid rgba(255,255,255,.18) !important;
+}
+
+.theme-dark .dropdown-content{
+  background: #0f1830 !important;
+}
+
+.theme-dark .dropdown-content li>span{
+  color: var(--text) !important;
+}
+
+.theme-dark .dropdown-content li:hover{
+  background: rgba(94,234,212,.10) !important;
+}
+
+.theme-dark .btn{
+  background: rgba(94,234,212,.18) !important;
+}
+
+.theme-dark .btn:hover{
+  background: rgba(94,234,212,.26) !important;
+}
+
+.theme-dark .switch label input[type=checkbox]:checked + .lever{
+  background-color: rgba(94,234,212,.35);
+}
+
+.theme-dark .switch label input[type=checkbox]:checked + .lever:after{
+  background-color: var(--accent);
+}
+
+/* Light theme */
+.theme-light{
+  --bg: #f4f6fb;
+  --bg2: #ffffff;
+  --card: rgba(255,255,255,.95);
+  --border: rgba(0,0,0,.08);
+  --text: #0b1220;
+  --muted: rgba(11,18,32,.65);
+  background: linear-gradient(180deg, var(--bg2), var(--bg));
+  color: var(--text);
+}
+
+.theme-light .app-nav{
+  background: rgba(255,255,255,.72);
+}
+
+.theme-light .app-chip{
+  background: rgba(0,0,0,.03);
+}
+
+/* small screens tweaks */
+@media (max-width: 600px){
+  .app-container{ width: 98vw; padding: 12px 8px; }
+  .app-title{ font-size: 16px; }
+}
+
+/* ==========================================================================
+   Light theme fixes (Materialize nav text is white by default)
+   ========================================================================== */
+.theme-light .app-nav,
+.theme-light .app-nav .brand-logo,
+.theme-light .app-nav .brand-logo *,
+.theme-light .app-nav ul a,
+.theme-light .app-nav .material-icons {
+  color: var(--text) !important; /* garante texto escuro no navbar */
+}
+
+.theme-light .app-subtitle {
+  color: var(--muted) !important;
+}
+
+/* Garante títulos sempre visíveis em ambos os temas */
+.app-section-title,
+.app-title {
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Fix: Seleção manual (lista de versos) no tema LIGHT
+   ========================================================================== */
+.theme-light .app-verses{
+  background: rgba(0,0,0,.02);
+}
+
+.theme-light .app-verses .collection-item{
+  border-bottom: 1px solid rgba(0,0,0,.06) !important;
+}
+
+.theme-light .app-verse-num{
+  color: #0aa; /* mantém destaque do número no light */
+}
+
+.theme-light .app-verse-text{
+  opacity: .95; /* um pouco mais forte no light */
+}
