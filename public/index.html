@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bíblia Multi-Idiomas (PT/JA)</title>
+  <title>Bíblia Multi-Idiomas</title>
 
   <!-- Materialize -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -45,13 +45,39 @@
           <div class="card app-card">
             <div class="card-content">
               <div class="app-pills">
-                <span id="langStatus" class="chip app-chip"><i class="material-icons tiny">translate</i> PT/JA</span>
+                <span id="langStatus" class="chip app-chip"><i class="material-icons tiny">translate</i> PT/ES/EN/JA</span>
                 <span id="status" class="chip app-chip"><i class="material-icons tiny">info</i> Iniciando…</span>
               </div>
 
               <div class="divider app-divider"></div>
 
               <div class="row">
+                <div class="col s12">
+                  <label class="app-check-title">Idiomas exibidos</label>
+                  <div class="app-language-checks">
+                    <label class="app-check-row">
+                      <input id="langAll" type="checkbox" class="filled-in" checked />
+                      <span>Todos os idiomas</span>
+                    </label>
+                    <label class="app-check-row">
+                      <input id="lang-pt" type="checkbox" class="filled-in app-lang-toggle" data-lang="pt" checked />
+                      <span>Português</span>
+                    </label>
+                    <label class="app-check-row">
+                      <input id="lang-es" type="checkbox" class="filled-in app-lang-toggle" data-lang="es" checked />
+                      <span>Espanhol</span>
+                    </label>
+                    <label class="app-check-row">
+                      <input id="lang-en" type="checkbox" class="filled-in app-lang-toggle" data-lang="en" checked />
+                      <span>Inglês</span>
+                    </label>
+                    <label class="app-check-row">
+                      <input id="lang-ja" type="checkbox" class="filled-in app-lang-toggle" data-lang="ja" checked />
+                      <span>Japonês</span>
+                    </label>
+                  </div>
+                </div>
+
                 <div class="input-field col s12">
                   <select id="book"></select>
                   <label>Livro</label>
@@ -76,7 +102,11 @@
               <div class="app-actions">
                 <button id="loadBtn" class="btn waves-effect waves-light">
                   Carregar
-                  <i class="material-icons right">open_in_new</i>
+                  <i class="material-icons right">visibility</i>
+                </button>
+                <button id="updateBtn" class="btn waves-effect waves-light">
+                  Atualizar
+                  <i class="material-icons right">refresh</i>
                 </button>
                 <button id="clearSelBtn" class="btn-flat waves-effect app-btn-flat-danger">
                   Limpar seleção
@@ -84,8 +114,8 @@
               </div>
 
               <p class="app-hint">
-                Dica: use intervalo (início/fim) ou marque versículos manualmente na lista ao lado.
-                A tabela abre em <b>nova janela</b>.
+                Dica: ao carregar um capítulo, todos os versículos já vêm selecionados.
+                Se a janela de comparação já estiver aberta, o conteúdo é atualizado nela mesma.
               </p>
 
               <div class="divider app-divider"></div>
@@ -93,19 +123,35 @@
               <h6 class="app-section-title">Traduções</h6>
 
               <div class="row">
-                <div class="input-field col s12">
+                <div class="input-field col s12 app-translation-group" data-lang="pt">
                   <select id="ptSelect"></select>
                   <label>Português</label>
                 </div>
-                <div class="col s12 app-mini">
+                <div class="col s12 app-mini app-translation-group" data-lang="pt">
                   Selecionado: <span class="app-accent" id="ptCode">—</span>
                 </div>
 
-                <div class="input-field col s12" style="margin-top: 12px;">
+                <div class="input-field col s12 app-translation-group" data-lang="es" style="margin-top: 12px;">
+                  <select id="esSelect"></select>
+                  <label>Espanhol</label>
+                </div>
+                <div class="col s12 app-mini app-translation-group" data-lang="es">
+                  Selecionado: <span class="app-accent" id="esCode">—</span>
+                </div>
+
+                <div class="input-field col s12 app-translation-group" data-lang="en" style="margin-top: 12px;">
+                  <select id="enSelect"></select>
+                  <label>Inglês</label>
+                </div>
+                <div class="col s12 app-mini app-translation-group" data-lang="en">
+                  Selecionado: <span class="app-accent" id="enCode">—</span>
+                </div>
+
+                <div class="input-field col s12 app-translation-group" data-lang="ja" style="margin-top: 12px;">
                   <select id="jaSelect"></select>
                   <label>Japonês</label>
                 </div>
-                <div class="col s12 app-mini">
+                <div class="col s12 app-mini app-translation-group" data-lang="ja">
                   Selecionado: <span class="app-accent" id="jaCode">—</span>
                 </div>
               </div>
@@ -158,14 +204,14 @@
             <div class="card-content">
               <div class="app-right-header">
                 <div>
-                  <h6 class="app-section-title" style="margin:0;">Seleção manual (texto base = Português)</h6>
+                  <h6 class="app-section-title" style="margin:0;">Seleção manual (texto base = <span id="baseLanguageLabel">Português</span>)</h6>
                   <div class="app-mini">
-                    Marque versículos para comparar. A janela da tabela atualiza automaticamente.
+                    Marque versículos para comparar. O capítulo atualizado reaproveita a janela já aberta.
                   </div>
                 </div>
 
                 <div class="hide-on-small-only app-mini">
-                  <i class="material-icons tiny">open_in_new</i> Resultado abre em nova janela
+                  <i class="material-icons tiny">refresh</i> Atualização na mesma janela
                 </div>
               </div>
 
@@ -177,7 +223,7 @@
             <div class="card-content">
               <h6 class="app-section-title" style="margin:0;">Tabela comparativa</h6>
               <div class="app-mini" style="margin-top:6px;">
-                A tabela é exibida <b>sempre</b> em uma nova janela ao clicar em <b>Carregar</b>.
+                Clique em <b>Carregar</b> para abrir a comparação e em <b>Atualizar</b> para recarregar a mesma janela.
               </div>
             </div>
           </div>
